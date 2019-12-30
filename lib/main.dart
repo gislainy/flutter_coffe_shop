@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_coffe_shop/bottom_bar.dart';
+import 'package:flutter_coffe_shop/details_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,35 +9,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Coffe Shop',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Coffe Shop'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -44,68 +29,291 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      body: ListView(
+        padding: EdgeInsets.only(left: 15.0),
+        children: <Widget>[
+          SizedBox(height: 50.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('Welcome, Nadia',
+                  style: TextStyle(
+                      fontFamily: 'varela',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff473d3a))),
+              Padding(
+                padding: EdgeInsets.only(right: 15.0),
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: AssetImage('assets/model.jpg'),
+                          fit: BoxFit.cover)),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 45),
+            child: Container(
+              child: Text(
+                  'Let\'s select the best taste for you next coffe break!',
+                  style: TextStyle(
+                      fontFamily: 'nunito',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xffb0aaa7))),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('Taste of the week',
+                  style: TextStyle(
+                      fontFamily: 'varela',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xff473d3a))),
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Text('See all',
+                    style: TextStyle(
+                        fontFamily: 'varela',
+                        fontSize: 17,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xffcec7c4))),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 410,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                _coffeListCard(
+                    'assets/starbucks.png',
+                    'Caffe Misto',
+                    'Coffeeshop',
+                    'Our dark, rich espresso balanced with steamed milk and a light layer of foam',
+                    '\$4.99',
+                    false),
+                _coffeListCard(
+                    'assets/starbucks.png',
+                    'Caffe Late',
+                    'Coffeeshop',
+                    'Rich, full-bodied expresso with bittwersweet milk sauce and steamed milk',
+                    '\$3.99',
+                    false),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('Explore nearby',
+                  style: TextStyle(
+                      fontFamily: 'varela',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xff473d3a))),
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Text('See all',
+                    style: TextStyle(
+                        fontFamily: 'varela',
+                        fontSize: 17,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xffcec7c4))),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            height: 125,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                _buildImage('assets/coffee.jpg'),
+                _buildImage('assets/coffee2.jpg'),
+                _buildImage('assets/coffee3.jpg'),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          )
+        ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      // bottomNavigationBar: BottomBar(),
+    );
+  }
+
+  Widget _buildImage(String imgPath) {
+    return Padding(
+      padding: EdgeInsets.only(right: 15),
+      child: Container(
+        height: 100,
+        width: 175,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            image:
+                DecorationImage(image: AssetImage(imgPath), fit: BoxFit.cover)),
+      ),
+    );
+  }
+
+  Widget _coffeListCard(String imgPath, String coffeName, String shopName,
+      String description, String price, bool isFavorite) {
+    return Padding(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+      child: Container(
+        height: 300,
+        width: 225,
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Stack(
+              children: <Widget>[
+                Container(
+                  height: 335,
+                ),
+                Positioned(
+                  top: 75.0,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10, right: 20),
+                    height: 260,
+                    width: 225,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Color(0xffDAB68C)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 60,
+                        ),
+                        Text(
+                          shopName + '\'s',
+                          style: TextStyle(
+                              fontFamily: 'nunito',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          coffeName,
+                          style: TextStyle(
+                              fontFamily: 'varela',
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          description,
+                          style: TextStyle(
+                              fontFamily: 'nunito',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              price,
+                              style: TextStyle(
+                                  fontFamily: 'varela',
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff3a4742)),
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white),
+                              child: Center(
+                                  child: Icon(
+                                Icons.favorite,
+                                color: isFavorite ? Colors.red : Colors.grey,
+                                size: 15,
+                              )),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 60,
+                  top: 25,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(imgPath), fit: BoxFit.contain)),
+                  ),
+                )
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            SizedBox(
+              height: 20,
             ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => DetailsPage()));
+              },
+              child: Container(
+                height: 50,
+                width: 225,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Color(0xff473d3a)),
+                child: Center(
+                  child: Text('Order Now',
+                      style: TextStyle(
+                          fontFamily: 'nunito',
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                ),
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
